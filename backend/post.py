@@ -4,7 +4,7 @@ from models import Post
 from flask import request
 
 
-post_ns = Namespace('posts', description="A namespace for Posts")
+post_ns = Namespace('post', description="A namespace for Posts")
 
 
 # Schema
@@ -32,6 +32,7 @@ class PostResources(Resource):
 
     @post_ns.marshal_with(post_model)
     @post_ns.expect(post_model)
+    @jwt_required()
     def post(self):
        title = request.json['title']
        subtitle = request.json['subtitle']
